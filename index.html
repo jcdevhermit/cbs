@@ -45,15 +45,64 @@
 		</ul>
 		<ul class="navbar-nav ml-auto">
             <li class="nav-item">
-                <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">Sign-In</a>
+                <a class="nav-link" href="#" onclick="document.getElementById('modal-wrapper').style.display='block'">Sign-In</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="" data-target="#myModal" data-toggle="modal">Regiser</a>
+                <a class="nav-link" href="#" onclick="document.getElementById('modal-wrapper1').style.display='block'">Register</a>
             </li>
         </ul>
 	</div>
 </div>
 </nav>
+
+<!-- Modal Sign In -->
+<div id="modal-wrapper" class="modal">
+  
+  <form class="modal-content animate" action="/action_page.php">
+        
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modal-wrapper').style.display='none'" class="close" title="Close PopUp">&times;</span>
+      <img src="img/logo.png" alt="logo" class="logo">
+      <h1 style="text-align:center">Sign In</h1>
+    </div>
+
+    <div class="container">
+      <input type="text" placeholder="Enter Username" name="uname">
+      <input type="password" placeholder="Enter Password" name="psw">        
+      <button class="modal-btn" type="submit">Sign In</button>
+      <input type="checkbox" style="margin:26px 30px;"> Remember me      
+      <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Forgot Password ?</a>
+    </div>
+    
+  </form>
+  
+</div>
+
+<!-- Modal Register -->
+<div id="modal-wrapper1" class="modal">
+  
+  <form class="modal-content animate" action="/action_page.php">
+        
+    <div class="imgcontainer">
+      <span onclick="document.getElementById('modal-wrapper1').style.display='none'" class="close" title="Close PopUp">&times;</span>
+      <img src="img/logo.png" alt="logo" class="logo">
+      <h1 style="text-align:center">Register</h1>
+    </div>
+
+    <div class="container">
+      <input type="text" placeholder="Enter Username" name="uname">
+      <input type="password" placeholder="Enter Password" name="psw">  
+      <input type="email" placeholder="E-mail Address" name="E-mail">      
+      <button class="modal-btn" type="submit">Register</button>
+      <input type="checkbox" style="margin:26px 30px;"> Remember me      
+      <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Already have an account?</a>
+    </div>
+    
+  </form>
+  
+</div>
+
+
 
 <!--- Image Slider -->
 <div id="slides" class="carousel slide" data-ride="carousel">
@@ -306,7 +355,22 @@
 	</div>
 </footer>
 
+<script>
+// If user clicks anywhere outside of the modal, Modal will close
 
+var modal = document.getElementById('modal-wrapper');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+var modal = document.getElementById('modal-wrapper1');
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
 
 </body>
 </html>

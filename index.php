@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
 	<link href="css/style.css" rel="stylesheet">
 </head>
+
 <body>
 
 <!-- Navigation -->
@@ -78,10 +79,47 @@
   
 </div>
 
+
+<?php
+	// Get values from register modaL
+	$conn = mysqli_connect("localhost", "username", "password", "cbs");
+
+	$firstName = '';
+	$lastName = '';
+	$username  = '';
+	$email = '';
+	$password = '';
+	$contactNo = '';
+
+	if ($conn->connect_error) {
+	    "<script type='text/javascript'>alert('HELLO');</script>";
+	} 
+
+	if (isset($_POST['submit'])) {
+
+	    $firstName = $_POST['first-name'];
+	    $lastName = $_POST['last-name'];
+	    $username = $_POST['username'];
+	    $email = $_POST['email'];
+	    $password = $_POST['password'];
+	    $contactNo = $_POST['contact-no'];
+
+	    $query = "INSERT INTO 'customer' (customer_first_name, customer_last_name, customer_email, customer_username, customer_password, customer_contact_num) 
+	    		  VALUES ('$firstName', '$lastName', '$username', '$email', '$password', '$contactNo')";
+
+	   	$result = mysqli_query($conn, $query);
+        if ($result){
+            echo "<script type='text/javascript'>alert('user account createed');</script>";
+        }else{
+            echo "<script type='text/javascript'>alert('user not created');</script>";
+        }
+	}	
+?>
+
 <!-- Modal Register -->
 <div id="modal-wrapper1" class="modal">
   
-  <form class="modal-content animate" action="/action_page.php">
+  <form class="modal-content animate" action="<?php echo $_SERVER['PHP_SELF']; ?>" method="POST">
         
     <div class="imgcontainer">
       <span onclick="document.getElementById('modal-wrapper1').style.display='none'" class="close" title="Close PopUp">&times;</span>
@@ -90,10 +128,14 @@
     </div>
 
     <div class="container">
-      <input type="text" placeholder="Enter Username" name="uname">
-      <input type="password" placeholder="Enter Password" name="psw">  
-      <input type="email" placeholder="E-mail Address" name="E-mail">      
-      <button class="modal-btn" type="submit">Register</button>
+      <input type="text" placeholder="First Name" name="first-name">
+      <input type="text" placeholder="Last Name" name="last-name">  
+      <input type="text" placeholder="Username" name="username">
+      <input type="text" placeholder="Contact Number" name="contact-no">
+      <input type="email" placeholder="E-mail Address" name="email">  
+      <input type="password" placeholder="Password" name="password">   
+      <input type="password" placeholder="Confirm Password" name="confirm-password">     
+      <button class="modal-btn" type="submit" name="submit" value="signup">Register</button>
       <input type="checkbox" style="margin:26px 30px;"> Remember me      
       <a href="#" style="text-decoration:none; float:right; margin-right:34px; margin-top:26px;">Already have an account?</a>
     </div>
@@ -101,6 +143,7 @@
   </form>
   
 </div>
+
 
 
 

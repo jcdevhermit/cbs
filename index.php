@@ -82,38 +82,32 @@
 
 <?php
 	// Get values from register modaL
-	$conn = mysqli_connect("localhost", "username", "password", "cbs");
+	$db = mysqli_connect("localhost", "root", "", "cbs");
 
-	$firstName = '';
-	$lastName = '';
-	$username  = '';
-	$email = '';
-	$password = '';
-	$contactNo = '';
 
-	if ($conn->connect_error) {
-	    "<script type='text/javascript'>alert('HELLO');</script>";
+	if ($db->connect_error) {
+	    die("Failed to connect with MySQL: " . $db->connect_error);
 	} 
 
-	if (isset($_POST['submit'])) {
-
-	    $firstName = $_POST['first-name'];
+	if (isset($_POST['signup']))  {
+		$firstName = $_POST['first-name'];
 	    $lastName = $_POST['last-name'];
 	    $username = $_POST['username'];
 	    $email = $_POST['email'];
 	    $password = $_POST['password'];
 	    $contactNo = $_POST['contact-no'];
-
-	    $query = "INSERT INTO 'customer' (customer_first_name, customer_last_name, customer_email, customer_username, customer_password, customer_contact_num) 
+    
+	    $query = "INSERT INTO customer (customer_first_name, customer_last_name, customer_email, customer_username, customer_password, customer_contact_num) 
 	    		  VALUES ('$firstName', '$lastName', '$username', '$email', '$password', '$contactNo')";
 
-	   	$result = mysqli_query($conn, $query);
-        if ($result){
-            echo "<script type='text/javascript'>alert('user account createed');</script>";
-        }else{
-            echo "<script type='text/javascript'>alert('user not created');</script>";
-        }
-	}	
+		if(mysqli_query($db, $query)) {
+			echo "Successfully Registered!";
+		} else {
+			echo  "Error in registering...Please try again later!";
+		}
+			
+	}
+		
 ?>
 
 <!-- Modal Register -->
